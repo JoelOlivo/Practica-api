@@ -1,6 +1,7 @@
 // **PETICIONES HTTP**
 
 const chisteUrl = 'https://api.chucknorris.io/jokes/random';
+const usuarioUrl = 'https://reqres.in/api/users?page=2';
 
 // fetch(chisteUrl).then(res => {  // la promesa necesita transformarse a json
 
@@ -26,8 +27,10 @@ const obtenerChiste = async () => {
             throw Error('Efe compañero :( no se pudo realizar la petición');
         }
     
-        const {value, icon_url, id} = await resp.json(); 
-        return {value, icon_url, id};
+        // const {value, icon_url, id} = await resp.json(); 
+        // return {value, icon_url, id};
+
+        return resp
 
     } catch (error) {
 
@@ -35,11 +38,18 @@ const obtenerChiste = async () => {
     }
 }
 
+const obtenerUsuarios = async () => {
+
+        const resp = await fetch(usuarioUrl);
+        const {data} = await resp.json();
+
+        return data;
+}
 
 
 // EXPORTAR FUNCIONES
 
 export {
     obtenerChiste,
-
+    obtenerUsuarios
 }
